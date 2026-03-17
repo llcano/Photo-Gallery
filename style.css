@@ -1,143 +1,97 @@
+/* --- Base Styles / Mobile-First View --- */
+/* Mobile: One column grid, 10px gap, no media queries */
 body {
     background-color: #dedede;
+    font-family: Arial, sans-serif;
 }
 
 h1 {
     text-align: center;
-    font-family:Arial, sans-serif;
     font-size: 32px;
+}
+
+p {
+    font-size: 25px;
+    text-align: center;
 }
 
 a {
     color: #000;
     text-decoration: none;
-    font-family:Arial, sans-serif;
 }
 
-p {
-   font-size: 25px;
-   font-family:Arial, sans-serif;
-}
-
-img{
-  width:100%;
-}
-
-
-p{
-  text-align:center;
-}
-
-div img{
-    width:150px;
-    height: 150px;
-    display:block;
-    margin:auto;
-}
-
-div{
-  display: inline-block;
-  width: 24%;
-  margin: 5px;
-  padding: 2px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 
-main {
-    border: 5px #000 solid;
-    margin: 10px;
-}
- */
-/* 
-
-.container {
+.grid {
     display: grid;
     grid-template-columns: 1fr;
-    justify-items: center;
+    grid-gap: 10px;
 }
- */
-/* img{
-    width: 200px;
-    height: 200px;
-    padding: 5px;
-} */
 
-/* .child {
-    position: relative;
-    display: inline-block;
-    border: 5px black solid;
-    margin: 5px;
-    border-radius: 5px;
-} */
-
-/* 
-
-.label {
-    display: none;
-    position: absolute;
-    top: 40%;
-    left: 40%;
-} */
-/* 
-.button {
-    display: inline-block;
-    border: 2px solid #000;
-    padding: 5px;
-    border-radius: 25px;
+figure {
+    margin: 0;
+    padding: 10px;
+    border: 2px solid transparent; /* Placeholder for dark mode transition */
+    text-align: center;
 }
- */
-/* 
-.button:hover {
-    background-color:#fff;
-} */
 
-/* 
-footer {
-    display: flex;
-    justify-content: center;
-} */
-
-/* 
-header {
-    border-radius: 5px;
-    border: 5px #000 solid;
-    margin: 10px;
-} */
-
-/* 
-.label {
-    display: none;
-    position: absolute;
-    top: 40%;
-    left: 40%;
-} */
-/* 
-.child:hover .label {
+img {
+    width: 100%;
+    height: auto;
     display: block;
-} */
+}
+
+/* --- Tablet View --- */
+/* Trigger: 772px, 2-column grid, circular figures, last figure spans 2 columns */
+@media (min-width: 772px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    figure {
+        border-radius: 50%;
+        overflow: hidden; /* Ensures image respects circular border */
+        aspect-ratio: 1 / 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    figure:last-child {
+        grid-column: span 2;
+        border-radius: 0; /* Optional: adjust if last child should stay circular or rectangular */
+    }
+}
+
+/* --- Large Screen View --- */
+/* Trigger: 992px, 3rd figure spans 2 columns, remove border radius */
+@media (min-width: 992px) {
+    .grid {
+        /* Maintain columns or adjust as needed; instructions imply spanning within existing flow */
+        grid-template-columns: 1fr 1fr 1fr; 
+    }
+
+    figure {
+        border-radius: 0;
+        aspect-ratio: auto;
+    }
+
+    figure:nth-child(3n) {
+        grid-column: span 2;
+    }
+}
+
+/* --- Accessibility: Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* --- Dark Color Scheme --- */
+@media (prefers-color-scheme: dark) {
+    figure {
+        background-color: #333; /* Dark color */
+        color: #ffefd5;        /* Light/Yellow-ish color (PapayaWhip) */
+        border: 2px solid #000; /* Black border */
+    }
+}
